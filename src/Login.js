@@ -4,7 +4,7 @@ function Login() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
    
-    const [errors, setErrors] = useState([])
+    const [loginErrors, setLoginErrors] = useState([])
 
     function onSubmit(e){
         e.preventDefault()
@@ -20,8 +20,14 @@ function Login() {
         })
         .then(res => res.json())
         .then(json => {
-            console.log(json)
-            if(json.errors) setErrors(json.errors)
+          console.log('hi')
+            if(json.error){
+              
+              setLoginErrors(json.error)
+            }else{
+              // setUser(json)
+              setLoginErrors(false)
+            }
         })
     }
     return (
@@ -40,7 +46,7 @@ function Login() {
        
         <input type="submit" value="Login!" />
       </form>
-      {errors?errors.map(e => <div>{e}</div>):null}
+      {loginErrors?loginErrors.map(e => <div>{e}</div>):null}
         </>
     )
 }

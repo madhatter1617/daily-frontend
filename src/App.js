@@ -2,66 +2,99 @@ import './App.css';
 import Nav from './Nav';
 import Auth from './Auth'
 import Login from './Login'
+import {Link} from "react-router-dom";
 
 import React, {useState, useEffect} from 'react';
 import {Route, Switch, BrowserRouter} from 'react-router-dom';
+import EntireslContainer from './EntireslContainer';
 
 function App() {
     const [user, setUser] = useState(null);
-    const [reviews, setReviews] = useState([]);
-    const [bakeItems, setBakeItems] = useState([]);
+    const [entries, setEntries] = useState([]);
+    const [errors, setErrors] = useState(false)
+
 
     // getting the user for state
     useEffect(() => {
-        fetch('/users').then((response) => {
+        fetch("/me").then((response) => {
             if (response.ok) {
                 response.json().then((user) => setUser(user));
             }
         });
     }, []);
-
-    // getting bakery items
-    // useEffect(() => {
-    // fetch('/bakeries').then((r) => r.json()).then((item) => {
-    // setBakeItems(item);
-    // });
-    // }, []);
-
-    function handleLogin(user) {
-        setUser(user);
+    // this is for the entries form which is not made yet
+    function handlePost(obj) {
+        fetch('/entries', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        }).then(res => res.json()).then(data => {
+            console.log('hi')
+            console.log(data)
+            if (data.ok) {
+                setErrors(data.errors)
+            } else {
+                setEntries([
+                    ...entries,
+                    data
+                ])
+            }
+        })
+    }
+    function onLogout() {
+        setEntries([])
+        setUser(false)
     }
 
-    function handleLogout() {
-        setUser(null);
-        setReviews(null);
-    }
-    // nned to change to get the entry
-    // useEffect(() => {
-    // fetch('/reviews').then((response) => {
-    // console.log('RESPONSE FROM GET REVIEWS', response);
-    // response.json().then((review) => {
-    // console.log('GET REQUEST TO REVIEWS APP.JS', review);
-    // setReviews(review);
-    // });
-    // });
-    // }, []);
 
-
-    console.log('JUST BEFORE RETURN', reviews);
+    console.log('JUST BEFORE RETURN', entries);
     return (
         <div className="App">
 
-            {/* <Header user={user} onLogout={handleLogout} reviews={reviews} setReviews={setReviews} /> */}
+
             <BrowserRouter>
                 <Switch>
+
                     <Route exact path="/">
                         <Nav/>
                     </Route>
                     <Route path="/sign_up">
                         <Auth/>
+                        <button>
+                            <Link to="/">
+                                ZeroGiven</Link>
+                        </button>
+                        <button>
+                            <Link to="/entries">
+                                ZeroFoxsGiven</Link>
+                        </button>
                     </Route>
                     <Route path="/login">
                         <Login/>
+                        <button>
+                            <Link to="/">
+                                ZeroGiven</Link>
+                        </button>
+                        <button>
+                            <Link to="/entries">
+                                ZeroFoxsGiven</Link>
+                        </button>
+                    </Route>
+                    <Route path="/entries">
+                        <EntireslContainer errors={errors}
+                            entries={entries}
+                            setUser={setUser}
+                            setErrors={setErrors}
+                            setEntries={setEntries}
+                            onLogout={onLogout}
+                            user={user}/>
+                        <button>
+                            <Link to="/">
+                                ZeroGiven</Link>
+                        </button>
+
                     </Route>
                 </Switch>
             </BrowserRouter>
@@ -70,27 +103,3 @@ function App() {
 }
 
 export default App;
-
-
-// function App() {
-// return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-// );
-// }
-
-// export default App;
