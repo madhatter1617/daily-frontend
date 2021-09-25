@@ -48,8 +48,21 @@ function App() {
         setUser(false)
     }
 
+    //not sure what i needed this for 
+    // fetch(`/entries/${id}`).then(res => res.json()).then(data => {
+    //     // console.log('hi')
+    //     // console.log(data)
+    //     // console.log(errors)s
+    //     if (data.error) {
+    //         // console.log('24')
+    //         setErrors(data.error)
+    //     } else {
+    //         // console.log('26')
+    //         setEntries(data)
+    //     }
+    // })
 
-    console.log('JUST BEFORE RETURN', entries);
+    // console.log('JUST BEFORE RETURN', entries);
     return (
         <div className="App">
 
@@ -85,6 +98,7 @@ function App() {
                     <Route path="/entries">
                         <EntireslContainer errors={errors}
                             entries={entries}
+                            user={user}
                             setUser={setUser}
                             setErrors={setErrors}
                             setEntries={setEntries}
