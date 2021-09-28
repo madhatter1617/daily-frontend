@@ -1,12 +1,12 @@
 import EntryCard from './EntryCard'
 import {useEffect, useState} from 'react'
 
-function EntireslContainer({
-    // entries,
+function EntiresContainer({
+    
     errors,
     user,
     setUser,
-    // setEntries,
+ 
     setErrors,
     onLogout
 }) {
@@ -19,8 +19,7 @@ function EntireslContainer({
                 response.json().then((user) => setUser(user));
             }
         });               
-    }, []
-)
+    }, []);
 
 useEffect(() => {
     fetch('/entries').then((response) => {
@@ -36,38 +35,6 @@ useEffect(() => {
         fetch("/logout", {method: "DELETE"}).then(onLogout)
     }
 
-    // function listItems() {       
-        
-    //     console.log(entries)
-    //     return entries.map((e) => (
-            
-    //         <div>
-                
-    //             <p> {e.title} </p>
-    //             <p> {e.entry_text} </p>
-    //             <button onClick={() => handleDelete(e.id)}>DELETE</button>
-    //             {/* <button onClick={() => potato()}>EDIT</button> */}
-    //         </div>
-            
-    //     ));
-        
-    // }
-
-    // function handleDelete(id) {
-    //     fetch(`/entries/${id}`, {
-    //         method: 'DELETE'
-    //     })
-    //         .then((r) => r.json())
-    //         .then((deletedEntry) => {
-    //             setEntries((prevEntry) => {
-    //                 const copyEntries = [ ...prevEntry ];
-    //                 const index = copyEntries.findIndex((entry) => deletedEntry.id === entry.id);
-    //                 console.log('INDEX FROM DELETE REQUEST', index);
-    //                 copyEntries.splice(index, 1);
-    //                 return copyEntries;
-    //             });
-    //         });
-    // } 
 
     const handleChangeTitle = (title) => {
 		setTitle(title.target.value);
@@ -85,7 +52,7 @@ useEffect(() => {
 				'Content-Type': 'application/json',
 				Accept: 'application/json'
 			},
-			body: JSON.stringify({ title: title, entry_text: text })
+			body: JSON.stringify({ title, entry_text: text })
 		})
 			.then((response) => response.json())
 			.then((eData) => setEntries((entry) => [ ...entry, eData ]));
@@ -99,18 +66,19 @@ useEffect(() => {
 
             <h1>Welcome, {user.username}!</h1>
             
-			{/* {listItems(entries)} */}
-            <p>Add a new entry here: </p>
+		    <p>Add a new entry here: </p>
             <br />
 
             <form onSubmit={handleSubmit}>
+                <p> Title here:  </p>
                 <input onChange={handleChangeTitle} type="textTitle" name="newReview" />
+                <p> Entry text here:  </p>
                 <input onChange={handleChangeText} type="textText" name="newReview" />
                 <button type="submit">Submit</button>
             </form>
             <p>Here are your journal entries!</p>
 
-             {errors? errors.map(e => <div>{e}</div>):<table>{entries.map(entry => <EntryCard setEntries={setEntries} entries={entries} key={entry.id} entry={entry} />)}</table>
+             {errors? errors.map(e => <div>{e}</div>):<div>{entries.map(entry => <EntryCard  key={entry.id} entry={entry} setEntries={setEntries} entries={entries}/>)}</div>
         }  </div>
         ) : (
             <p>
@@ -121,4 +89,4 @@ useEffect(() => {
     );
 }
 
-export default EntireslContainer;
+export default EntiresContainer;
