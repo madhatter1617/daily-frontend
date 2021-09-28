@@ -25,15 +25,21 @@ function EntireslContainer({
         fetch("/logout", {method: "DELETE"}).then(onLogout)
     }
 
-    function listItems() {
+    function listItems() {       
+        
+        console.log(entries)
         return entries.map((e) => (
+            
             <div>
+                
                 <p> {e.title} </p>
                 <p> {e.entry_text} </p>
                 <button onClick={() => handleDelete(e.id)}>DELETE</button>
                 {/* <button onClick={() => potato()}>EDIT</button> */}
             </div>
+            
         ));
+        
     }
 
     function handleDelete(id) {
@@ -112,7 +118,7 @@ function EntireslContainer({
         }  </div>
         ) : (
             <p>
-						IDK What to put here
+						You are not logged in!
 					</p>
 				)}
     </>

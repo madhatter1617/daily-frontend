@@ -13,7 +13,7 @@ function App() {
     const [entries, setEntries] = useState([]);
     const [errors, setErrors] = useState(false)
 
-
+    
     // getting the user for state
     useEffect(() => {
         fetch("/me").then((response) => {
@@ -23,30 +23,44 @@ function App() {
         });
     }, []);
     // this is for the entries form which is not made yet
-    function handlePost(obj) {
-        fetch('/entries', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(obj)
-        }).then(res => res.json()).then(data => {
-            console.log('hi')
-            console.log(data)
-            if (data.ok) {
-                setErrors(data.errors)
-            } else {
-                setEntries([
-                    ...entries,
-                    data
-                ])
-            }
-        })
-    }
+    // function handlePost(obj) {
+    //     fetch('/entries', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(obj)
+    //     }).then(res => res.json()).then(data => {
+    //         console.log('hi')
+    //         console.log(data)
+    //         if (data.ok) {
+    //             setErrors(data.errors)
+    //         } else {
+    //             setEntries([
+    //                 ...entries,
+    //                 data
+    //             ])
+    //         }
+    //     })
+    // }
     function onLogout() {
-        setEntries([])
-        setUser(false)
+        setEntries(null)
+        setUser(null)
     }
+
+    function handleLogin(user) {
+		setUser(user);
+	}
+
+    useEffect(() => {
+		fetch('/entries').then((response) => {
+			console.log('RESPONSE FROM GET entries', response);
+			response.json().then((entry) => {
+				console.log('GET REQUEST TO REVIEWS APP.JS', entry);
+				setEntries(entry);
+			});
+		});
+	}, []);
 
     //not sure what i needed this for 
     // fetch(`/entries/${id}`).then(res => res.json()).then(data => {
@@ -85,7 +99,7 @@ function App() {
                         </button>
                     </Route>
                     <Route path="/login">
-                        <Login/>
+                        <Login onLogin={handleLogin} />
                         <button>
                             <Link to="/">
                                 ZeroGiven</Link>
