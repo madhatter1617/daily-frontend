@@ -52,15 +52,15 @@ function App() {
 		setUser(user);
 	}
 
-    useEffect(() => {
-		fetch('/entries').then((response) => {
-			console.log('RESPONSE FROM GET entries', response);
-			response.json().then((entry) => {
-				console.log('GET REQUEST TO REVIEWS APP.JS', entry);
-				setEntries(entry);
-			});
-		});
-	}, []);
+    // useEffect(() => {
+	// 	fetch('/entries').then((response) => {
+	// 		console.log('RESPONSE FROM GET entries', response);
+	// 		response.json().then((entry) => {
+	// 			console.log('GET REQUEST TO REVIEWS APP.JS', entry);
+	// 			setEntries(entry);
+	// 		});
+	// 	});
+	// }, []);
 
     //not sure what i needed this for 
     // fetch(`/entries/${id}`).then(res => res.json()).then(data => {
@@ -111,11 +111,11 @@ function App() {
                     </Route>
                     <Route path="/entries">
                         <EntireslContainer errors={errors}
-                            entries={entries}
+                            // entries={entries}
                             user={user}
                             setUser={setUser}
                             setErrors={setErrors}
-                            setEntries={setEntries}
+                            // setEntries={setEntries}
                             onLogout={onLogout}
                             user={user}/>
                         <button>

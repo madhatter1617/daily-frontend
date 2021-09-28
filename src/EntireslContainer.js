@@ -2,16 +2,17 @@ import EntryCard from './EntryCard'
 import {useEffect, useState} from 'react'
 
 function EntireslContainer({
-    entries,
+    // entries,
     errors,
     user,
     setUser,
-    setEntries,
+    // setEntries,
     setErrors,
     onLogout
 }) {
     const [ title, setTitle ] = useState('');
     const [ text, setText ] = useState('');
+    const  [entries, setEntries] = useState([]);
     useEffect(() => {
         fetch("/me").then((response) => {
             if (response.ok) {
@@ -21,42 +22,52 @@ function EntireslContainer({
     }, []
 )
 
+useEffect(() => {
+    fetch('/entries').then((response) => {
+        console.log('RESPONSE FROM GET entries', response);
+        response.json().then((entry) => {
+            console.log('GET REQUEST TO REVIEWS APP.JS', entry);
+            setEntries(entry);
+        });
+    });
+}, []);
+
     function logout() {
         fetch("/logout", {method: "DELETE"}).then(onLogout)
     }
 
-    function listItems() {       
+    // function listItems() {       
         
-        console.log(entries)
-        return entries.map((e) => (
+    //     console.log(entries)
+    //     return entries.map((e) => (
             
-            <div>
+    //         <div>
                 
-                <p> {e.title} </p>
-                <p> {e.entry_text} </p>
-                <button onClick={() => handleDelete(e.id)}>DELETE</button>
-                {/* <button onClick={() => potato()}>EDIT</button> */}
-            </div>
+    //             <p> {e.title} </p>
+    //             <p> {e.entry_text} </p>
+    //             <button onClick={() => handleDelete(e.id)}>DELETE</button>
+    //             {/* <button onClick={() => potato()}>EDIT</button> */}
+    //         </div>
             
-        ));
+    //     ));
         
-    }
+    // }
 
-    function handleDelete(id) {
-        fetch(`/entries/${id}`, {
-            method: 'DELETE'
-        })
-            .then((r) => r.json())
-            .then((deletedEntry) => {
-                setEntries((prevEntry) => {
-                    const copyEntries = [ ...prevEntry ];
-                    const index = copyEntries.findIndex((entry) => deletedEntry.id === entry.id);
-                    console.log('INDEX FROM DELETE REQUEST', index);
-                    copyEntries.splice(index, 1);
-                    return copyEntries;
-                });
-            });
-    } 
+    // function handleDelete(id) {
+    //     fetch(`/entries/${id}`, {
+    //         method: 'DELETE'
+    //     })
+    //         .then((r) => r.json())
+    //         .then((deletedEntry) => {
+    //             setEntries((prevEntry) => {
+    //                 const copyEntries = [ ...prevEntry ];
+    //                 const index = copyEntries.findIndex((entry) => deletedEntry.id === entry.id);
+    //                 console.log('INDEX FROM DELETE REQUEST', index);
+    //                 copyEntries.splice(index, 1);
+    //                 return copyEntries;
+    //             });
+    //         });
+    // } 
 
     const handleChangeTitle = (title) => {
 		setTitle(title.target.value);
@@ -79,21 +90,6 @@ function EntireslContainer({
 			.then((response) => response.json())
 			.then((eData) => setEntries((entry) => [ ...entry, eData ]));
 	}
-//re look over this
-// function getEntries(){
-//     fetch(`/entries/${id}`).then(res => res.json()).then(data => {
-//         // console.log('hi')
-//         // console.log(data)
-//         // console.log(errors)s
-//         if (data.error) {
-//             // console.log('24')
-//             setErrors(data.error)
-//         } else {
-//             // console.log('26')
-//             setEntries(data)
-//         }
-//     })
-// }
 
     return (
     <>
@@ -102,9 +98,9 @@ function EntireslContainer({
             <button onClick={logout}>Log out</button>
 
             <h1>Welcome, {user.username}!</h1>
-            <p>Here are your journal entries!</p>
-			{listItems(entries)}
-
+            
+			{/* {listItems(entries)} */}
+            <p>Add a new entry here: </p>
             <br />
 
             <form onSubmit={handleSubmit}>
@@ -112,9 +108,9 @@ function EntireslContainer({
                 <input onChange={handleChangeText} type="textText" name="newReview" />
                 <button type="submit">Submit</button>
             </form>
+            <p>Here are your journal entries!</p>
 
-
-             {errors? errors.map(e => <div>{e}</div>):<table>{entries.map(entry => <EntryCard  key={entry.id} entry={entry} />)}</table>
+             {errors? errors.map(e => <div>{e}</div>):<table>{entries.map(entry => <EntryCard setEntries={setEntries} entries={entries} key={entry.id} entry={entry} />)}</table>
         }  </div>
         ) : (
             <p>
