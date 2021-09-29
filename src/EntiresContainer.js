@@ -2,17 +2,17 @@ import EntryCard from './EntryCard'
 import {useEffect, useState} from 'react'
 
 function EntiresContainer({
-    
+    entries,
     errors,
     user,
     setUser,
- 
+    setEntries,
     setErrors,
     onLogout
 }) {
     const [ title, setTitle ] = useState('');
     const [ text, setText ] = useState('');
-    const  [entries, setEntries] = useState([]);
+   
     useEffect(() => {
         fetch("/me").then((response) => {
             if (response.ok) {
@@ -78,7 +78,7 @@ useEffect(() => {
             </form>
             <p>Here are your journal entries!</p>
 
-             {errors? errors.map(e => <div>{e}</div>):<div>{entries.map(entry => <EntryCard  key={entry.id} entry={entry} setEntries={setEntries} entries={entries}/>)}</div>
+             {errors? errors.map(e => <div>{e}</div>):<div>{entries.map(entry => <EntryCard  key={entry.id} entry={entry}  setEntries={setEntries} />)}</div>
         }  </div>
         ) : (
             <p>

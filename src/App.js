@@ -45,7 +45,7 @@ function App() {
         })
     }
     function onLogout() {
-        setEntries(null)
+        // setEntries([])
         setUser(null)
     }
 
@@ -92,7 +92,10 @@ function App() {
                             user={user}
                             setUser={setUser}
                             setErrors={setErrors}                           
-                            onLogout={onLogout}/>
+                            onLogout={onLogout} 
+                            setEntries={setEntries}
+                            entries={entries}
+                            />
                         <button>
                             <Link to="/">
                                 ZeroGiven</Link>
