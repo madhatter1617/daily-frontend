@@ -58,6 +58,24 @@ useEffect(() => {
 			.then((eData) => setEntries((entry) => [ ...entry, eData ]));
 	}
 
+
+   
+
+
+    function handleDeleteEntry(id) {
+        const updatedEntryArray = entries.filter((entry) => entry.id !== id);
+        setEntries(updatedEntryArray);
+      }
+    
+
+    // function handleUpdateEntry(updatedEntry) {
+    //     const updatedEntryArray = entries.map((entry) => {
+    //       return entry.id === updatedEntry.id ? updatedEntry : entry;
+    //     });
+    //     setEntries(updatedEntryArray);
+    //   }
+
+
     return (
     <>
         {user ? (
@@ -67,7 +85,7 @@ useEffect(() => {
             <h1>Welcome, {user.username}!</h1>
             
 		    <p>Add a new entry here: </p>
-            <br />
+          
 
             <form onSubmit={handleSubmit}>
                 <p> Title here:  </p>
@@ -76,9 +94,10 @@ useEffect(() => {
                 <input onChange={handleChangeText} type="textText" name="newReview" />
                 <button type="submit">Submit</button>
             </form>
+            <br />
             <p>Here are your journal entries!</p>
 
-             {errors? errors.map(e => <div>{e}</div>):<div>{entries.map(entry => <EntryCard  key={entry.id} entry={entry}  setEntries={setEntries} />)}</div>
+             {errors? errors.map(e => <div>{e}</div>):<div>{entries.map(entry => <EntryCard  key={entry.id} entry={entry}  setEntries={setEntries} onDelete={handleDeleteEntry}  handleChangeText={handleChangeText} handleChangeTitle={handleChangeTitle} title={title} text={text}/>)}</div>
         }  </div>
         ) : (
             <p>
