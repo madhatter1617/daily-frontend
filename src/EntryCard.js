@@ -58,7 +58,7 @@ function EntryCard({entry, setEntries, onDelete, onUpdate, handleChangeTitle, ha
 			body: JSON.stringify({ title, entry_text: text })
 		})
 			.then((response) => response.json())
-			.then((eData) => setEntries((entry) => [ ...entry, eData ]));
+			.then((eData) => setEntries(eData));
 	}
 
     // function potato() {
@@ -107,7 +107,7 @@ function EntryCard({entry, setEntries, onDelete, onUpdate, handleChangeTitle, ha
                 <input onChange={handleChangeTitle} type="textTitle" name="newReview" />
                 <p> Edit Entry text here:  </p>
                 <input onChange={handleChangeText} type="textText" name="newReview" />
-                <button type="submit">Save edit </button>
+                {/* <button type="submit">Save edit </button> */}
             </form>
         
          </div>
