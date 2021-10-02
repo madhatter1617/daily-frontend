@@ -32,29 +32,20 @@ function App() {
             },
             body: JSON.stringify(obj)
         }).then(res => res.json()).then(data => {
-            console.log('hi')
+            console.log('hi, from appjs post')
             console.log(data)
-            if (data.ok) {
+            if(data.ok){
                 setErrors(data.errors)
-            } else {
-                setEntries([
-                    ...entries,
-                    data
-                ])
-            }
+              } else {
+                setEntries([...entries,data])
+              }
         })
     }
     function onLogout() {
-        // setEntries([])
+        setEntries([])
         setUser(null)
     }
 
-    function handleLogin(user) {
-        setUser(user);
-    }
-
-  
-    // console.log('JUST BEFORE RETURN', entries);
     return (
         <div className="App">
 
@@ -77,7 +68,7 @@ function App() {
                         </button>
                     </Route>
                     <Route path="/login">
-                        <Login onLogin={handleLogin}/>
+                        <Login  setErrors={setErrors}/>
                         <button>
                             <Link to="/">
                                 ZeroGiven</Link>

@@ -31,9 +31,12 @@ useEffect(() => {
     });
 }, []);
 
-    function logout() {
-        fetch("/logout", {method: "DELETE"}).then(onLogout)
-    }
+function logout(){
+    fetch("/logout",{
+      method:"DELETE"
+    })
+    .then(onLogout)
+  }
 
 
     const handleChangeTitle = (title) => {
@@ -60,8 +63,6 @@ useEffect(() => {
 
 
    
-
-
     function handleDeleteEntry(id) {
         const updatedEntryArray = entries.filter((entry) => entry.id !== id);
         setEntries(updatedEntryArray);

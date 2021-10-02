@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-function Login({onLogin}) {
+function Login({onLogin, setErrors}) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
    
@@ -8,25 +8,32 @@ function Login({onLogin}) {
 
     function onSubmit(e){
         e.preventDefault()
-           
+        const user = {
+          username,
+          password
+      }
+
         fetch(`/login`,{
           method:'POST',
           headers:{'Content-Type': 'application/json'},
-          body:JSON.stringify({ username, password })
+          body:JSON.stringify(user)
         })
         .then(res => res.json())
-        .then(user => {
-          console.log('hi')
-          console.log('LOGIN POST REQUEST', user);
-          onLogin(user);
+        .then(json => {
+         
+            if(json.error){
+              console.log('hi, not logged')
+              setLoginErrors(json.error)
 
-            // if(user.error){
-            //   setLoginErrors(user.error)
-            // }else{
+            }else{
+              // setUser(json)
+              setErrors(false)
+              console.log('hi, logged in')
               
-            //   setLoginErrors(false)
-            // }
+            }
         })
+          
+
     }
   
     return (

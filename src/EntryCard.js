@@ -49,7 +49,7 @@ function EntryCard({entry, setEntries, onDelete, onUpdate, handleChangeTitle, ha
     }
     function handleSubmitEdit(e) {
 		e.preventDefault();
-        fetch(`/entries/${id}`, {
+        fetch(`/entries/${entry.id}`, {
 			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/json',
@@ -57,48 +57,12 @@ function EntryCard({entry, setEntries, onDelete, onUpdate, handleChangeTitle, ha
 			},
 			body: JSON.stringify({ title, entry_text: text })
 		})
-			.then((response) => response.json())
-			.then((eData) => setEntries(eData));
+			.then((r) => r.json())
+			.then((eData) => setEntries(eData)
+            );
 	}
 
-    // function potato() {
-	// 	return (
-	// 		<div>
-	// 			<form onSubmit={handleSubmit}>
-    //             <input onChange={(e) => setTitle(e.target.value)} type="text" name="editTitle" value={title} />
-    //             <input onChange={(e) => setText(e.target.value)} type="text" name="editText"value={text} />
-	// 				<button type="submit" value="save" >
-	// 					Submit
-	// 				</button>
-	// 				<button type="button" onClick={handleCancel}>
-	// 					Cancel
-	// 				</button>
-	// 			</form>
-	// 		</div>
-	// 	);
-	// }
-    // function handleEditClick() {
-    //     setIsEditing(!isEditing);
-    //     console.log({ isEditing });
-    //   }
-    
-    // function handleCancel() {
-	// 	setIsEditing(false);
-	// }
 
-    // function handleUpdate() {
-    //     fetch(`/entries/${id}`, {
-    //       method: "PATCH",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({ title, entry_text: text }),
-    //     })
-    //       .then((r) => r.json())
-    //       .then((updatedEntry) => {
-    //         onUpdate(updatedEntry);
-    //       });
-    //   } 
     return (
         <div>
             {listItems(entry)}
