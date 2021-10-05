@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-function EntryCard({entry, setEntries, onDelete, onUpdate, handleChangeTitle, handleChangeText, handleSubmitEdit, text, title, handleUpdate, setText, setTitle}) {
+function EntryCard({entry, setEntries, onDelete, onUpdate,  handleSubmitEdit, text, title, handleUpdate, setText, setTitle}) {
     // const { id, title, text } = entry;
     const { id } = entry;
     // const [ isEditing, setIsEditing ] = useState(false);
-
+    const [newTitle, setNewTitle] = useState(entry.title);
+    const [newText, setNewText] = useState(entry.entry_text);
 
     // const [isEditMode, setIsEditMode] = useState(false);
     // function handleEditClick() {
@@ -55,21 +56,27 @@ function EntryCard({entry, setEntries, onDelete, onUpdate, handleChangeTitle, ha
 				'Content-Type': 'application/json',
 				Accept: 'application/json'
 			},
-			body: JSON.stringify({ title, entry_text: text })
+			body: JSON.stringify({ title: newTitle , entry_text: newText })
 		})
 			.then((r) => r.json())
 			.then(handleUpdate);
 	}
+  const handleChangeTitle = (e) => {
+    setNewTitle(e.target.value)
+} 
 
+const handleChangeText = (e) => {
+  setNewText(e.target.value)
+}
 
     return (
         <div>
             {listItems(entry)}
             <form onSubmit={handleSubmitEdit}>
                 <p> Edit Title here:  </p>
-                <input onChange={(e) => {handleChangeTitle(e)}} type="textTitle" name="newTitle" value={setTitle} />
+                <input onChange={(e) => {handleChangeTitle(e)}} type="textTitle" name="newReview" value={newTitle} />
                 <p> Edit Entry text here:  </p>
-                <input onChange={(e) => {handleChangeText(e)}} type="textText" name="newText" value={setText} />
+                <input onChange={(e) => {handleChangeText(e)}} type="textText" name="newText" value={newText} />
                 <button type="submit">Save edit </button>
             </form>
         
