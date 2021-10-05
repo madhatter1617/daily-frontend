@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-function EntryCard({entry, setEntries, onDelete, onUpdate, handleChangeTitle, handleChangeText, handleSubmitEdit, text, title}) {
+function EntryCard({entry, setEntries, onDelete, onUpdate, handleChangeTitle, handleChangeText, handleSubmitEdit, text, title, handleUpdate, setText, setTitle}) {
     // const { id, title, text } = entry;
     const { id } = entry;
     // const [ isEditing, setIsEditing ] = useState(false);
 
 
-    const [isEditMode, setIsEditMode] = useState(false);
-    function handleEditClick() {
-      setIsEditMode(!isEditMode);
-      console.log({ isEditMode });
-    }
+    // const [isEditMode, setIsEditMode] = useState(false);
+    // function handleEditClick() {
+    //   setIsEditMode(!isEditMode);
+    //   console.log({ isEditMode });
+    // }
 
     function handleDeleteClick() {
         fetch(`/entries/${id}`, {
@@ -38,7 +38,7 @@ function EntryCard({entry, setEntries, onDelete, onUpdate, handleChangeTitle, ha
                 } </p>
                 <button onClick={handleDeleteClick}> DELETE</button>
                  
-                <button onClick={handleSubmitEdit}> EDIT</button> 
+                {/* <button onClick={handleSubmitEdit}> EDIT</button>  */}
                 <br/>
                 <br />
                
@@ -58,8 +58,7 @@ function EntryCard({entry, setEntries, onDelete, onUpdate, handleChangeTitle, ha
 			body: JSON.stringify({ title, entry_text: text })
 		})
 			.then((r) => r.json())
-			.then((eData) => setEntries(eData)
-            );
+			.then(handleUpdate);
 	}
 
 
@@ -68,10 +67,10 @@ function EntryCard({entry, setEntries, onDelete, onUpdate, handleChangeTitle, ha
             {listItems(entry)}
             <form onSubmit={handleSubmitEdit}>
                 <p> Edit Title here:  </p>
-                <input onChange={handleChangeTitle} type="textTitle" name="newReview" />
+                <input onChange={(e) => {handleChangeTitle(e)}} type="textTitle" name="newTitle" value={setTitle} />
                 <p> Edit Entry text here:  </p>
-                <input onChange={handleChangeText} type="textText" name="newReview" />
-                {/* <button type="submit">Save edit </button> */}
+                <input onChange={(e) => {handleChangeText(e)}} type="textText" name="newText" value={setText} />
+                <button type="submit">Save edit </button>
             </form>
         
          </div>

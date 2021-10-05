@@ -69,12 +69,12 @@ function logout(){
       }
     
 
-    // function handleUpdateEntry(updatedEntry) {
-    //     const updatedEntryArray = entries.map((entry) => {
-    //       return entry.id === updatedEntry.id ? updatedEntry : entry;
-    //     });
-    //     setEntries(updatedEntryArray);
-    //   }
+      function handleUpdate(updatedEntry) {
+        const updatedEntries = entries.map((entry) =>
+        entry.id === updatedEntry.id ? updatedEntry : entry
+        );
+        setEntries(updatedEntries);
+      }
 
 
     return (
@@ -98,7 +98,7 @@ function logout(){
             <br />
             <p>Here are your journal entries!</p>
 
-             {errors? errors.map(e => <div>{e}</div>):<div>{entries.map(entry => <EntryCard  key={entry.id} entry={entry}  setEntries={setEntries} onDelete={handleDeleteEntry}  handleChangeText={handleChangeText} handleChangeTitle={handleChangeTitle} title={title} text={text}/>)}</div>
+             {errors? errors.map(e => <div>{e}</div>):<div>{entries.map(entry => <EntryCard  key={entry.id} entry={entry}  setEntries={setEntries} onDelete={handleDeleteEntry}  handleChangeText={handleChangeText} handleChangeTitle={handleChangeTitle} title={title} text={text} handleUpdate={handleUpdate}/>)}</div>
         }  </div>
         ) : (
             <p>
