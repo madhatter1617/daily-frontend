@@ -10,7 +10,7 @@ import EntiresContainer from './EntiresContainer';
 import EntryForm from './EntryForm'
 
 function App() {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState({});
     const [entries, setEntries] = useState([]);
     const [errors, setErrors] = useState(false)
 

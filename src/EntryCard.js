@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-function EntryCard({entry, setEntries, onDelete, onUpdate,  handleSubmitEdit, text, title, handleUpdate, setText, setTitle}) {
+function EntryCard({entry, setEntries, onDelete, handleUpdate, }) {
     // const { id, title, text } = entry;
     const { id } = entry;
     // const [ isEditing, setIsEditing ] = useState(false);
@@ -39,7 +39,7 @@ function EntryCard({entry, setEntries, onDelete, onUpdate,  handleSubmitEdit, te
                 } </p>
                 <button onClick={handleDeleteClick}> DELETE</button>
                  
-                {/* <button onClick={handleSubmitEdit}> EDIT</button>  */}
+                {/* <button onClick={handleEditClick}> EDIT</button>  */}
                 <br/>
                 <br />
                
@@ -72,7 +72,7 @@ const handleChangeText = (e) => {
     return (
         <div>
             {listItems(entry)}
-            <form onSubmit={handleSubmitEdit}>
+            <form onSubmit={handleSubmitEdit} autoComplete="off" >
                 <p> Edit Title here:  </p>
                 <input onChange={(e) => {handleChangeTitle(e)}} type="textTitle" name="newReview" value={newTitle} />
                 <p> Edit Entry text here:  </p>

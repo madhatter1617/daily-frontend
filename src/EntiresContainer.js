@@ -37,6 +37,14 @@ function logout(){
     })
     .then(onLogout)
   }
+//   function logout(){
+//   fetch("/logout", { method: "DELETE" }).then((r) => {
+//     if (r.ok) {
+//       setUser({});
+//     }
+//   });
+// }
+
 
 
     const handleChangeTitle = (title) => {
@@ -98,7 +106,7 @@ function logout(){
             <br />
             <p>Here are your journal entries!</p>
 
-             {errors? errors.map(e => <div>{e}</div>):<div>{entries.map(entry => <EntryCard  key={entry.id} entry={entry}  setEntries={setEntries} onDelete={handleDeleteEntry}  handleChangeText={handleChangeText} handleChangeTitle={handleChangeTitle} title={title} text={text} handleUpdate={handleUpdate}/>)}</div>
+             {errors? errors.map(e => <div>{e}</div>):<div>{entries.map(entry => <EntryCard  key={entry.id} entry={entry}  setEntries={setEntries} onDelete={handleDeleteEntry} handleUpdate={handleUpdate}/>)}</div>
         }  </div>
         ) : (
             <p>
