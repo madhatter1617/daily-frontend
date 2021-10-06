@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 import React, {useState, useEffect} from 'react';
 import {Route, Switch, BrowserRouter} from 'react-router-dom';
 import EntiresContainer from './EntiresContainer';
-import EntryForm from './EntryForm'
+// import EntryForm from './EntryForm'
 
 function App() {
     const [user, setUser] = useState({});
@@ -94,10 +94,10 @@ function App() {
                         </button>
 
                     </Route>
-                    <Route exact path="/productions/new">
+                    {/* <Route exact path="/productions/new">
                         <EntryForm handlePost={handlePost}
                             errors={errors}/>
-                    </Route>
+                    </Route> */}
 
                 </Switch>
             </BrowserRouter>

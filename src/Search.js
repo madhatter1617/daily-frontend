@@ -7,7 +7,7 @@ function Search({setSearch}) {
       type="text" 
       placeholder="Search Entries by title..."
       onChange={(e)=> setSearch(e.target.value)} 
-      />
+      autoComplete="off" />
     </div>
   );
 }

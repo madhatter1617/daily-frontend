@@ -12,15 +12,15 @@ function EntryCard({entry, setEntries, onDelete, handleUpdate }) {
       console.log({ isEditMode });
     }
 
-    function handleDeleteClick() {
-        fetch(`/entries/${id}`, {
-          method: "DELETE",
-        }).then((r) => {
-          if (r.ok) {
-            onDelete(id);
-          }
-        });
-      }
+    // function handleDeleteClick() {
+    //     fetch(`/entries/${id}`, {
+    //       method: "DELETE",
+    //     }).then((r) => {
+    //       if (r.ok) {
+    //         onDelete(id);
+    //       }
+    //     });
+    //   }
 
    
     function listItems() {
@@ -37,7 +37,7 @@ function EntryCard({entry, setEntries, onDelete, handleUpdate }) {
                     Text: {
                     entry.entry_text
                 } </p>
-                <button onClick={handleDeleteClick}> DELETE</button>
+                {/* <button onClick={handleDeleteClick}> DELETE</button> */}
                  
                 {/* <button onClick={handleEditClick}> EDIT</button>  */}
 
@@ -100,7 +100,7 @@ function handleCancel() {
     return (
       
         <div>
-            {listItems(entry)}
+            {/* {listItems(entry)} */}
            
            
             {/* {isEditMode ? {editForm} : !{editForm}} */}
