@@ -5,7 +5,7 @@ function Search({setSearch}) {
     <div className="filter">
       <input id="search-bar" 
       type="text" 
-      placeholder="Search Entries by title..."
+      placeholder="Search..."
       onChange={(e)=> setSearch(e.target.value)} 
       autoComplete="off" />
     </div>

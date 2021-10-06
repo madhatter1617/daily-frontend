@@ -1,10 +1,12 @@
 import React, {useState} from 'react'
+import { useHistory } from "react-router-dom";
 
 function Login() {
+  const history = useHistory();
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
    
-    const [loginErrors, setLoginErrors] = useState([])
+    // const [loginErrors, setLoginErrors] = useState([])
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState([]);
     
@@ -23,17 +25,18 @@ function Login() {
           body:JSON.stringify(user)
         })
         .then(res => res.json())
-        .then(json => {
+        .then(data => {
          
-            if(json.error){
+            if(data.errors){
               console.log('hi, not logged')
-              setLoginErrors(json.error)
+              setErrors(data.errors)
 
             }else{
               // setUser(json)
               setIsLoading(false);
-              setErrors(false)
+              // setErrors(false)
               console.log('hi, logged in')
+              history.push("/entries");
               
             }
         })
@@ -55,17 +58,17 @@ function Login() {
           : null} */}
 
 
-        <label>
+        <p>
           Username
    
           <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-        </label>
+        </p>
         <br />
-        <label>
+        <p>
          Password
     
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </label>
+        </p>
         <br />
        
         <button type="submit" value="Login"  >  
@@ -73,7 +76,7 @@ function Login() {
          </button>
       </form>
       <br />
-      {loginErrors?loginErrors.map(e => <div>{e}</div>):null}
+      {errors.map(error => <div>{error}</div>)}
         </>
     )
 }

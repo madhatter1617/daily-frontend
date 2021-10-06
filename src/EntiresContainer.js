@@ -1,4 +1,4 @@
-import EntryCard from './EntryCard'
+// import EntryCard from './EntryCard'
 import {useEffect, useState} from 'react'
 import Search from "./Search";
 import Sidebar from "./Sidebar";
@@ -90,7 +90,7 @@ function EntiresContainer({
 
     const searchedNote = () => {
         if (search.length > 0) {
-            return entries.filter(entry => entry.title.toLowerCase().includes(search.toLowerCase()))
+            return entries.filter(entry => entry.entry_text.toLowerCase().includes(search.toLowerCase()) || entry.title.toLowerCase().includes(search.toLowerCase()) )
         }
         return entries
     }
@@ -119,11 +119,12 @@ function EntiresContainer({
                     <input onChange={handleChangeText}
                         type="textText"
                         name="newReview"/>
+                        <br/>
                     <button type="submit">Submit</button>
 
                     <button type="button"
                         onClick={handleCancel}>
-                        Cancel
+                        Close
                     </button>
                 </form>
             </div>
@@ -156,8 +157,7 @@ function EntiresContainer({
                     ) : (newEntryPost())
                 }
 
-                    <p>You can search for your entries by title here
-                    </p>
+                    <p>Want to look for something specific?</p>
                     <Search setSearch={setSearch}/>
                     <Sidebar searchEntry={searchedNote()} entries={entries} setEntries={setEntries} handleDeleteEntry={handleDeleteEntry} handleUpdate={handleUpdate} /> {/* <Content viewEntry={viewEntry} setViewEntry={setViewEntry} entryEdit={entryEdit} setEntryEdit={setEntryEdit} setEntries={setEntries} entries={entries} setNewEdit={setNewEdit} newEdit={newEdit} editNote={editNote}/> */}
 

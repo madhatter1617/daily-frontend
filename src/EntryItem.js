@@ -7,6 +7,12 @@ function EntryItem({serach, serach:{title, entry_text}, entries, setEntries, han
     const [newTitle, setNewTitle] = useState(serach.title);
     const [newText, setNewText] = useState(serach.entry_text);
 
+    const [canSee, setCanSee] = useState(false);
+    function viewClick() {
+        setCanSee(!canSee);
+      console.log({ canSee });
+    }
+
     const [isEditMode, setIsEditMode] = useState(true);
     function handleEditClick() {
       setIsEditMode(!isEditMode);
@@ -65,19 +71,29 @@ function editForm(){
 function handleCancel() {
   setIsEditMode(!isEditMode);
 }
-
+function canView(){
+    return( 
+        <div> <p>{entry_text}</p> </div>  )
+}
 
   return (
-    <ul 
-    //  onClick = { ()=> {
-    // // clickNote(serach)
-    // setEentryEdit(false)
-    //  }}
-     >    
-      <h2>{title}</h2> 
-      <p>{entry_text}</p>
+    <ul >
+    <h2 className="primary" onClick={viewClick}> {title} </h2>
+    {canSee? canView() :null}
+      
+      {/* {canSee ? (
+                    <h2 className="primary" onClick={viewClick}>
+                     {title}
+                    </h2>
+                  ) : (
+                    canView()
+                  )} */}
+
+
+      {/* <p>{entry_text}</p> */}
        {/* <p>{entry_text.substring(0, 69)}</p> */}
        <button onClick={handleDeleteClick}> DELETE</button>
+       
        {isEditMode ? (
                     <button className="primary" onClick={handleEditClick}>
                       Edit!
