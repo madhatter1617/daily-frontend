@@ -31,7 +31,8 @@ function App() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(obj)
-        }).then(res => res.json()).then(data => {
+        }).then(res => res.json())
+            .then(data => {
             console.log('hi, from appjs post')
             console.log(data)
             if(data.ok){

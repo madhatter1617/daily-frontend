@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-function EntryCard({entry, setEntries, onDelete, handleUpdate, }) {
+function EntryCard({entry, setEntries, onDelete, handleUpdate }) {
     // const { id, title, text } = entry;
     const { id } = entry;
     // const [ isEditing, setIsEditing ] = useState(false);
     const [newTitle, setNewTitle] = useState(entry.title);
     const [newText, setNewText] = useState(entry.entry_text);
 
-    // const [isEditMode, setIsEditMode] = useState(false);
-    // function handleEditClick() {
-    //   setIsEditMode(!isEditMode);
-    //   console.log({ isEditMode });
-    // }
+    const [isEditMode, setIsEditMode] = useState(true);
+    function handleEditClick() {
+      setIsEditMode(!isEditMode);
+      console.log({ isEditMode });
+    }
 
     function handleDeleteClick() {
         fetch(`/entries/${id}`, {
@@ -40,6 +40,14 @@ function EntryCard({entry, setEntries, onDelete, handleUpdate, }) {
                 <button onClick={handleDeleteClick}> DELETE</button>
                  
                 {/* <button onClick={handleEditClick}> EDIT</button>  */}
+
+                {isEditMode ? (
+                    <button className="primary" onClick={handleEditClick}>
+                      Edit!
+                    </button>
+                  ) : (
+                    editForm()
+                  )}
                 <br/>
                 <br />
                
@@ -68,17 +76,41 @@ function EntryCard({entry, setEntries, onDelete, handleUpdate, }) {
 const handleChangeText = (e) => {
   setNewText(e.target.value)
 }
+function editForm(){
+  return (
+    <div>
 
-    return (
-        <div>
-            {listItems(entry)}
-            <form onSubmit={handleSubmitEdit} autoComplete="off" >
+  <form onSubmit={handleSubmitEdit} autoComplete="off" >
                 <p> Edit Title here:  </p>
                 <input onChange={(e) => {handleChangeTitle(e)}} type="textTitle" name="newReview" value={newTitle} />
                 <p> Edit Entry text here:  </p>
                 <input onChange={(e) => {handleChangeText(e)}} type="textText" name="newText" value={newText} />
                 <button type="submit">Save edit </button>
+                <button type="button" onClick={handleCancel}>
+						Cancel Edit
+					</button>
             </form>
+            </div>
+		);
+}
+
+function handleCancel() {
+  setIsEditMode(!isEditMode);
+}
+    return (
+      
+        <div>
+            {listItems(entry)}
+           
+           
+            {/* {isEditMode ? {editForm} : !{editForm}} */}
+            {/* <form onSubmit={handleSubmitEdit} autoComplete="off" >
+                <p> Edit Title here:  </p>
+                <input onChange={(e) => {handleChangeTitle(e)}} type="textTitle" name="newReview" value={newTitle} />
+                <p> Edit Entry text here:  </p>
+                <input onChange={(e) => {handleChangeText(e)}} type="textText" name="newText" value={newText} />
+                <button type="submit">Save edit </button>
+            </form> */}
         
          </div>
     );

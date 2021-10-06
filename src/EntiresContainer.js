@@ -1,5 +1,8 @@
 import EntryCard from './EntryCard'
 import {useEffect, useState} from 'react'
+import Search from "./Search";
+
+
 
 function EntiresContainer({
     entries,
@@ -12,6 +15,7 @@ function EntiresContainer({
 }) {
     const [ title, setTitle ] = useState('');
     const [ text, setText ] = useState('');
+    const[search, setSearch] = useState("")
    
     useEffect(() => {
         fetch("/me").then((response) => {
@@ -84,6 +88,13 @@ function logout(){
         setEntries(updatedEntries);
       }
 
+    //   const searchedNote=()=>{
+    //     if(search.length > 0){
+    //       return entries.filter(entry => entry.title.toLowerCase().includes(search.toLowerCase()) ) 
+    //     }
+    //     return entries
+    //   }
+
 
     return (
     <>
@@ -92,11 +103,13 @@ function logout(){
             <button onClick={logout}>Log out</button>
 
             <h1>Welcome, {user.username}!</h1>
-            
-		    <p>Add a new entry here: </p>
+
+            {/* <Search setSearch={setSearch} /> */}
+		    
+            <p>Add a new entry here: </p>
           
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} autoComplete="off" >
                 <p> Title here:  </p>
                 <input onChange={handleChangeTitle} type="textTitle" name="newReview" />
                 <p> Entry text here:  </p>
@@ -104,6 +117,8 @@ function logout(){
                 <button type="submit">Submit</button>
             </form>
             <br />
+
+            
             <p>Here are your journal entries!</p>
 
              {errors? errors.map(e => <div>{e}</div>):<div>{entries.map(entry => <EntryCard  key={entry.id} entry={entry}  setEntries={setEntries} onDelete={handleDeleteEntry} handleUpdate={handleUpdate}/>)}</div>

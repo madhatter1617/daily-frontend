@@ -26,20 +26,23 @@ function Auth() {
     }
     return (
         <> 
+        <h1>Please Sign-up!</h1>
         <form onSubmit={onSubmit}>
         <label>
           Username
    
           <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
         </label>
+        <br />
         <label>
          Password
     
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </label>
-       
+        </label>       
+         <br />
         <input type="submit" value="Sign up!" />
       </form>
+      <br />
       {errors?errors.map(e => <div>{e}</div>):null}
         </>
     )
