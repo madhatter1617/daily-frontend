@@ -11,7 +11,7 @@ import EntiresContainer from './EntiresContainer';
 // import EntryForm from './EntryForm'
 
 function App() {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(null);
     const [entries, setEntries] = useState([]);
     const [errors, setErrors] = useState(false)
 
@@ -25,24 +25,24 @@ function App() {
         });
     }, []);
     // this is for the entries form which is not made yet
-    function handlePost(obj) {
-        fetch('/entries', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(obj)
-        }).then(res => res.json())
-            .then(data => {
-            console.log('hi, from appjs post')
-            console.log(data)
-            if(data.ok){
-                setErrors(data.errors)
-              } else {
-                setEntries([...entries,data])
-              }
-        })
-    }
+    // function handlePost(obj) {
+    //     fetch('/entries', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(obj)
+    //     }).then(res => res.json())
+    //         .then(data => {
+    //         console.log('hi, from appjs post')
+    //         console.log(data)
+    //         if(data.ok){
+    //             setErrors(data.errors)
+    //           } else {
+    //             setEntries([...entries,data])
+    //           }
+    //     })
+    // }
 
     function onLogout() {
         setEntries([])
@@ -60,8 +60,8 @@ function App() {
                         <Nav/>
                     </Route>
                     <Route path="/sign_up">
-                        <Auth user={user}  setUser={setUser}/>
-                        <button  class='home'>
+                        <Auth  onLogin={setUser}/>
+                        <button  className='home'>
                             <Link to="/">
                                 ZeroGiven</Link>
                         </button>
@@ -71,8 +71,8 @@ function App() {
                         </button> */}
                     </Route>
                     <Route path="/login">
-                        <Login  setErrors={setErrors}/>
-                        <button class='home'>
+                        <Login onLogin={setUser} setErrors={setErrors}/>
+                        <button className='home'>
                             <Link to="/">
                                 ZeroGiven</Link>
                         </button>
@@ -90,7 +90,7 @@ function App() {
                             setEntries={setEntries}
                             entries={entries}
                             />
-                        <button class='home' >
+                        <button className='home' >
                             <Link to="/">
                                 ZeroGiven</Link>
                         </button>

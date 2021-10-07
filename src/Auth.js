@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { useHistory } from "react-router-dom";
 
 
-function Auth({user, setUser}) {
+function Auth({ onLogin}) {
   const history = useHistory();
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -16,7 +16,7 @@ function Auth({user, setUser}) {
             password
         }
        
-        fetch(`/users`,{
+        fetch(`/sign_up`,{
           method:'POST',
           headers:{'Content-Type': 'application/json'},
           body:JSON.stringify(user)
@@ -29,9 +29,10 @@ function Auth({user, setUser}) {
         // })
         .then((r) => {
           if (r.ok) {
-            r.json().then((user) => setUser(user));
-              history.push("/");
-          } else {
+            r.json().then((data) => 
+            onLogin(data));
+            history.push('/');         
+           } else {
             r.json().then((err) => setErrors(err.errors));
           }
         });
@@ -39,21 +40,21 @@ function Auth({user, setUser}) {
     }
     return (
         <> 
-        <h1>Please Sign-up!</h1>
+        <h1 className='Pls' >Please Sign-up!</h1>
         <form onSubmit={onSubmit}>
         <label>
           Username
    
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+          <input className='username' type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
         </label>
         <br />
         <label>
          Password
     
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input  className='password' type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </label>       
          <br />
-        <button type="submit" value="Sign up!">Sign up! </button>
+        <button className='loginBtn' type="submit" value="Sign up!">Sign up! </button>
       </form>
       <br />
       {errors?errors.map(e => <div>{e}</div>):null}

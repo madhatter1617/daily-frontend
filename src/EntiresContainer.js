@@ -38,10 +38,11 @@ function EntiresContainer({
 
     useEffect(() => {
         fetch('/entries').then((response) => {
-            console.log('RESPONSE FROM GET entries', response);
+            // console.log('RESPONSE FROM GET entries', response);
             response.json().then((entry) => {
-                console.log('GET REQUEST TO REVIEWS APP.JS', entry);
+                // console.log('GET REQUEST TO REVIEWS APP.JS', entry);
                 setEntries(entry);
+                
             });
         });
     }, []);
@@ -105,7 +106,7 @@ function EntiresContainer({
     function newEntryPost() {
         return (
             <div>
-                <form class='newpost' onSubmit={handleSubmit}
+                <form className='newpost' onSubmit={handleSubmit}
                     autoComplete="off">
                     <p>
                         Title here:
@@ -120,9 +121,9 @@ function EntiresContainer({
                         type="textText"
                         name="newReview"/>
                         <br/>
-                    <button class='save' type="submit">Submit</button>
+                    <button className='save' type="submit">Submit</button>
 
-                    <button class='close' type="button"
+                    <button className='close' type="button"
                         onClick={handleCancel}>
                         Close
                     </button>
@@ -144,7 +145,7 @@ function EntiresContainer({
                     <h1>Welcome, {
                         user.username
                     }!</h1>
-                    <p class='intro'>
+                    <p className='intro'>
                         This is your own virtual journal where you can vent all you want, without any Foxs Given!
                     </p>
 
@@ -164,7 +165,7 @@ function EntiresContainer({
                     {/* <input>Add a new entry here: </input>  */}
 
 
-                    <button class="logoutEC" onClick={logout}>Log out</button>
+                    <button className="logoutEC" onClick={logout}>Log out</button>
 
 
                     {/* <form onSubmit={handleSubmit} autoComplete="off" >

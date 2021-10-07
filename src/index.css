@@ -168,7 +168,8 @@ body {
 
 
 .hometext{
-  font-family: 'Lucida Handwriting';
+  /* font-family: 'Lucida Handwriting'; */ 
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
 	color: #67c5ff;
   text-shadow:    /* first set */

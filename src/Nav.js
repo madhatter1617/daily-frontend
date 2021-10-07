@@ -10,21 +10,21 @@ function Nav() {
         <div style={{backgroundColor: "orange"}} >
             {/* backgroundColor: "DodgerBlue", */}
 
-            <h1 class="hometext" >Welome to ZeroGiven, a virtual journal where you can vent your everything!</h1>
-            <img class='fox'src={"https://cdn.pixabay.com/photo/2020/03/08/13/37/cartoon-4912526_960_720.jpg"}
+            <h1 className="hometext" >Welome to ZeroGiven, a virtual journal where you can vent your everything!</h1>
+            <img className='fox'src={"https://cdn.pixabay.com/photo/2020/03/08/13/37/cartoon-4912526_960_720.jpg"}
                 alt={"fox image"}/>
                 <br/>
-            <button  class="login"  >
+            <button  className="login"  >
                 <Link to="/login">
                     Login</Link>
             </button>
             {/* <br/> */}
-            <button class="signup" >
+            <button className="signup" >
                 <Link to="/sign_up">
                     Sign Up</Link>
             </button>
 
-            <button class="home" >
+            <button className="home" >
                 <Link to="/">
                     ZeroGiven</Link>
             </button>

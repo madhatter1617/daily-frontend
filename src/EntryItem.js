@@ -54,15 +54,15 @@ function editForm(){
   return (
     <div  >
 
-  <form class="editarea" onSubmit={handleSubmitEdit} autoComplete="off" >
-  <button class="saveBtn" type="submit">Save edit </button>
-                <button class="cancelBtn" type="button" onClick={handleCancel}>
+  <form className="editarea" onSubmit={handleSubmitEdit} autoComplete="off" >
+  <button className="saveBtn" type="submit">Save edit </button>
+                <button className="cancelBtn" type="button" onClick={handleCancel}>
 						Cancel Edit
 					</button>
                 <p > Edit Title here:  </p>
-                <textarea name="text" rows="2" cols="69" wrap="soft" class="editTitle" onChange={(e) => {handleChangeTitle(e)}}  name="newReview" value={newTitle} />
+                <textarea name="text" rows="2" cols="69" wrap="soft" className="editTitle" onChange={(e) => {handleChangeTitle(e)}}  name="newReview" value={newTitle} />
                 <p > Edit Entry text here:  </p>
-                <textarea name="text" rows="10" cols="69" wrap="soft" class="editText" onChange={(e) => {handleChangeText(e)}}  name="newText" value={newText} />
+                <textarea name="text" rows="10" cols="69" wrap="soft" className="editText" onChange={(e) => {handleChangeText(e)}}  name="newText" value={newText} />
                 <br/>
                
             </form>
@@ -79,7 +79,7 @@ function canView(){
 }
 
   return (
-    <ul class="item">
+    <ul className="item">
     <p className="primaryTitle" onClick={viewClick}> {title} </p>
     {canSee? canView() :null}
       

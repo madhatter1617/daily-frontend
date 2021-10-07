@@ -3,7 +3,14 @@ import { useHistory } from "react-router-dom";
 import './index.css';
 
 
-function Login() {
+function Login({onLogin}) {
+  function notLoged(){
+    return (
+      <>
+      <p>try again!</p>
+      </>
+    )
+  }
   const history = useHistory();
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -31,7 +38,8 @@ function Login() {
          
             if(data.errors){
               console.log('hi, not logged')
-              setErrors(data.errors)
+              notLoged()
+              // setErrors(data.errors)
 
             }else{
               // setUser(json)
@@ -39,16 +47,18 @@ function Login() {
               // setErrors(false)
               console.log('hi, logged in')
               history.push("/entries");
+              onLogin(data);
               
             }
         })
           
 
-    }
-  
+}
+    
+   
     return (
         <> 
-         <h1 class='Pls' >Please Login</h1>
+         <h1 className='Pls' >Please Login</h1>
         <form onSubmit={onSubmit}>
 
         {/* {errors
@@ -60,25 +70,25 @@ function Login() {
           : null} */}
 
 
-        <p class='username'>
+        <p className='username'>
           Username: 
           </p>
           <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
         
         <br />
-        <p  class='password' >
+        <p  className='password' >
          Password: 
          </p>
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         
         <br />
        
-        <button  class='loginBtn' type="submit" value="Login"  >  
+        <button  className='loginBtn' type="submit" value="Login"  >  
         {isLoading ? "Loading..." : "Login"}
          </button>
       </form>
       
-      {errors.map(error => <div>{error}</div>)}
+      {errors.map(error => <div> {error}</div>)}
         </>
     )
 }
