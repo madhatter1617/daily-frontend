@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import { useHistory } from "react-router-dom";
+import './index.css';
+
 
 function Login() {
   const history = useHistory();
@@ -46,7 +48,7 @@ function Login() {
   
     return (
         <> 
-         <h1>Please Login</h1>
+         <h1 class='Pls' >Please Login</h1>
         <form onSubmit={onSubmit}>
 
         {/* {errors
@@ -58,24 +60,24 @@ function Login() {
           : null} */}
 
 
-        <p>
-          Username
-   
+        <p class='username'>
+          Username: 
+          </p>
           <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-        </p>
+        
         <br />
-        <p>
-         Password
-    
+        <p  class='password' >
+         Password: 
+         </p>
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </p>
+        
         <br />
        
-        <button type="submit" value="Login"  >  
+        <button  class='loginBtn' type="submit" value="Login"  >  
         {isLoading ? "Loading..." : "Login"}
          </button>
       </form>
-      <br />
+      
       {errors.map(error => <div>{error}</div>)}
         </>
     )

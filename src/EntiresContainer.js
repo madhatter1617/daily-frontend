@@ -105,24 +105,24 @@ function EntiresContainer({
     function newEntryPost() {
         return (
             <div>
-                <form onSubmit={handleSubmit}
+                <form class='newpost' onSubmit={handleSubmit}
                     autoComplete="off">
                     <p>
                         Title here:
                     </p>
-                    <input onChange={handleChangeTitle}
+                    <textarea name="text" rows="2" cols="69" wrap="soft"  onChange={handleChangeTitle}
                         type="textTitle"
                         name="newReview"/>
                     <p>
                         Entry text here:
                     </p>
-                    <input onChange={handleChangeText}
+                    <textarea name="text" rows="2" cols="69" wrap="soft"  onChange={handleChangeText}
                         type="textText"
                         name="newReview"/>
                         <br/>
-                    <button type="submit">Submit</button>
+                    <button class='save' type="submit">Submit</button>
 
-                    <button type="button"
+                    <button class='close' type="button"
                         onClick={handleCancel}>
                         Close
                     </button>
@@ -144,13 +144,13 @@ function EntiresContainer({
                     <h1>Welcome, {
                         user.username
                     }!</h1>
-                    <p>
+                    <p class='intro'>
                         This is your own virtual journal where you can vent all you want, without any Foxs Given!
                     </p>
 
                     {
                     newEntry ? (
-                        <button className="primary"
+                        <button className="addBtn"
                             onClick={NewClick}>
                             Let it all out here!
                         </button>
@@ -164,7 +164,7 @@ function EntiresContainer({
                     {/* <input>Add a new entry here: </input>  */}
 
 
-                    <button onClick={logout}>Log out</button>
+                    <button class="logoutEC" onClick={logout}>Log out</button>
 
 
                     {/* <form onSubmit={handleSubmit} autoComplete="off" >

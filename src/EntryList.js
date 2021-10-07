@@ -6,10 +6,12 @@ function EntryList({searchEntry,entries, setEntries, handleDeleteEntry, handleUp
  
 
   return (
-    <ul>
+    <>
+    <ul class="list">
       {/* Render list of notes here... */}
       {searchEntry.map(serach => <EntryItem  entries={entries} setEntries={setEntries} key={serach.id} serach={serach}  handleDeleteEntry={handleDeleteEntry} handleUpdate={handleUpdate}/>)}
     </ul>
+    </>
   );
 }
 

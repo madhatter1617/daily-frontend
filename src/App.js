@@ -1,4 +1,5 @@
 import './App.css';
+import './index.css';
 import Nav from './Nav';
 import Auth from './Auth'
 import Login from './Login'
@@ -42,6 +43,7 @@ function App() {
               }
         })
     }
+
     function onLogout() {
         setEntries([])
         setUser(null)
@@ -58,26 +60,26 @@ function App() {
                         <Nav/>
                     </Route>
                     <Route path="/sign_up">
-                        <Auth/>
-                        <button>
+                        <Auth user={user}  setUser={setUser}/>
+                        <button  class='home'>
                             <Link to="/">
                                 ZeroGiven</Link>
                         </button>
-                        <button>
+                        {/* <button>
                             <Link to="/entries">
                                 ZeroFoxsGiven</Link>
-                        </button>
+                        </button> */}
                     </Route>
                     <Route path="/login">
                         <Login  setErrors={setErrors}/>
-                        <button>
+                        <button class='home'>
                             <Link to="/">
                                 ZeroGiven</Link>
                         </button>
-                        <button>
+                        {/* <button>
                             <Link to="/entries">
                                 ZeroFoxsGiven</Link>
-                        </button>
+                        </button> */}
                     </Route>
                     <Route path="/entries">
                         <EntiresContainer errors={errors}                           
@@ -88,7 +90,7 @@ function App() {
                             setEntries={setEntries}
                             entries={entries}
                             />
-                        <button>
+                        <button class='home' >
                             <Link to="/">
                                 ZeroGiven</Link>
                         </button>

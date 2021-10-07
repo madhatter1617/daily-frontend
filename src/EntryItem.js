@@ -52,17 +52,19 @@ const handleChangeText = (e) => {
 }
 function editForm(){
   return (
-    <div>
+    <div  >
 
-  <form onSubmit={handleSubmitEdit} autoComplete="off" >
-                <p> Edit Title here:  </p>
-                <input onChange={(e) => {handleChangeTitle(e)}} type="textTitle" name="newReview" value={newTitle} />
-                <p> Edit Entry text here:  </p>
-                <input onChange={(e) => {handleChangeText(e)}} type="textText" name="newText" value={newText} />
-                <button type="submit">Save edit </button>
-                <button type="button" onClick={handleCancel}>
+  <form class="editarea" onSubmit={handleSubmitEdit} autoComplete="off" >
+  <button class="saveBtn" type="submit">Save edit </button>
+                <button class="cancelBtn" type="button" onClick={handleCancel}>
 						Cancel Edit
 					</button>
+                <p > Edit Title here:  </p>
+                <textarea name="text" rows="2" cols="69" wrap="soft" class="editTitle" onChange={(e) => {handleChangeTitle(e)}}  name="newReview" value={newTitle} />
+                <p > Edit Entry text here:  </p>
+                <textarea name="text" rows="10" cols="69" wrap="soft" class="editText" onChange={(e) => {handleChangeText(e)}}  name="newText" value={newText} />
+                <br/>
+               
             </form>
             </div>
 		);
@@ -73,12 +75,12 @@ function handleCancel() {
 }
 function canView(){
     return( 
-        <div> <p>{entry_text}</p> </div>  )
+        <div className="primary" > <p>{entry_text}</p> </div>  )
 }
 
   return (
-    <ul >
-    <h2 className="primary" onClick={viewClick}> {title} </h2>
+    <ul class="item">
+    <p className="primaryTitle" onClick={viewClick}> {title} </p>
     {canSee? canView() :null}
       
       {/* {canSee ? (
@@ -92,15 +94,16 @@ function canView(){
 
       {/* <p>{entry_text}</p> */}
        {/* <p>{entry_text.substring(0, 69)}</p> */}
-       <button onClick={handleDeleteClick}> DELETE</button>
+       
        
        {isEditMode ? (
-                    <button className="primary" onClick={handleEditClick}>
+                    <button className="editbtn"  onClick={handleEditClick}>
                       Edit!
                     </button>
                   ) : (
                     editForm()
                   )}
+                  <button className="deleteBtn" onClick={handleDeleteClick}> DELETE</button>
     </ul>
   );
 }

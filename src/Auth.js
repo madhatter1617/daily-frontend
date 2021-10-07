@@ -1,6 +1,9 @@
 import React, {useState} from 'react'
+import { useHistory } from "react-router-dom";
 
-function Auth() {
+
+function Auth({user, setUser}) {
+  const history = useHistory();
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
    
@@ -18,11 +21,21 @@ function Auth() {
           headers:{'Content-Type': 'application/json'},
           body:JSON.stringify(user)
         })
-        .then(res => res.json())
-        .then(json => {
-            console.log(json.error)
-            if(json.error) setErrors(json.error)
-        })
+        // .then(res => res.json())
+        // .then(json => {
+        //     console.log(json.error)
+        //     if(json.error) setErrors(json.error)
+        //     history.push("/");
+        // })
+        .then((r) => {
+          if (r.ok) {
+            r.json().then((user) => setUser(user));
+              history.push("/");
+          } else {
+            r.json().then((err) => setErrors(err.errors));
+          }
+        });
+        
     }
     return (
         <> 
@@ -40,7 +53,7 @@ function Auth() {
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </label>       
          <br />
-        <input type="submit" value="Sign up!" />
+        <button type="submit" value="Sign up!">Sign up! </button>
       </form>
       <br />
       {errors?errors.map(e => <div>{e}</div>):null}
